@@ -144,3 +144,30 @@ body{
         margin-bottom: 1rem;
       }
 }
+@media(max-width:500px)
+{
+    .item-container{
+        
+        margin: auto;
+        width: 90vw;
+        margin: auto;
+    }
+    .item-image{
+        height: 150px;
+        object-fit: cover;
+        margin: auto;
+        width: 18rem;
+        margin-bottom: 1rem;
+      }
+      .btn{
+          flex-shrink: 1;
+          letter-spacing: none;
+          margin: 0;
+          margin-bottom: 1rem;
+      }
+      .menu-container{
+          padding: 0rem 1rem;
+          width: 90vw;
+          margin: auto;
+      }
+}
