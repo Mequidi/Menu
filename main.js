@@ -82,28 +82,15 @@ const menu = [
   ];
 
 const sectionCenter = document.querySelector(".section-center");
-const btnsArray = document.querySelectorAll(".btn");
+const menuContainer = document.querySelector(".menu-container");
 
 window.addEventListener("DOMContentLoaded",function(){
     displayMenuItems(menu);
-});
-
-btnsArray.forEach(function(btn){
-  btn.addEventListener('click',function(e){
-    let category = e.currentTarget.dataset.id;
-    const tempArray = menu.filter(function(item){
-        if(item.category === category)
-          return item;
-        else if (category === "all")
-          return item;
-    });
-    displayMenuItems(tempArray);
-  })
+    createMenu(menu);
 });
 
 function displayMenuItems(menuItems)
 {
-    console.log(menuItems);
     let displayMenu = menuItems.map(function(item){
         return `<article class="item-container">
         <img class="item-image" src=${item.img}>
@@ -111,7 +98,7 @@ function displayMenuItems(menuItems)
             <!-- flex -->
             <header class="text-header">
                 <h4 class="text-title">$${item.title}</h4>
-                <h4 class="price">${item.price}</h4>
+                <h4 class="price">$${item.price}</h4>
             </header>
             <p class="desc">${item.desc}</p>
         </div>
@@ -120,4 +107,31 @@ function displayMenuItems(menuItems)
     displayMenu = displayMenu.join("");
     
     sectionCenter.innerHTML = displayMenu;
+}
+function createMenu(menuItems)
+{
+  const categoryArr = menuItems.reduce(function(values,item){
+    if(!values.includes(item.category))
+      values.push(item.category);
+    return values;
+  },["All"]);
+   
+  const tempMenu=categoryArr.map(function(item){
+    return ` <button class="btn" data-id="${item}">${item}</button>`
+  }).join("");
+  
+  menuContainer.innerHTML = tempMenu;
+  const btnsArray = document.querySelectorAll(".btn");
+  btnsArray.forEach(function(btn){
+    btn.addEventListener('click',function(e){
+      let category = e.currentTarget.dataset.id;
+      const tempArray = menu.filter(function(item){
+          if(item.category === category)
+            return item;
+          else if (category === "All")
+            return item;
+      });
+      displayMenuItems(tempArray);
+    })
+  });
 }
