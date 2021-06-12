@@ -97,7 +97,7 @@ function displayMenuItems(menuItems)
         <div class="text-container">
             <!-- flex -->
             <header class="text-header">
-                <h4 class="text-title">$${item.title}</h4>
+                <h4 class="text-title">${item.title}</h4>
                 <h4 class="price">$${item.price}</h4>
             </header>
             <p class="desc">${item.desc}</p>
